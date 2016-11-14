@@ -1,4 +1,4 @@
-# nginx-proxy-google
+# nginx-proxy-google [![CircleCI](https://circleci.com/gh/clarkzjw/nginx-proxy-google.svg?style=svg)](https://circleci.com/gh/clarkzjw/nginx-proxy-google)
 
 Inspired by [ngx_http_google_filter_module](https://github.com/cuber/ngx_http_google_filter_module)
 
