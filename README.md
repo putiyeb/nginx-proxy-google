@@ -1,4 +1,4 @@
-# nginx-proxy-google [![CircleCI](https://circleci.com/gh/clarkzjw/nginx-proxy-google.svg?style=svg)](https://circleci.com/gh/clarkzjw/nginx-proxy-google)
+# nginx-proxy-google [![](https://images.microbadger.com/badges/version/clarkzjw/nginx-proxy-google.svg)](https://microbadger.com/images/clarkzjw/nginx-proxy-google "Get your own version badge on microbadger.com") [![CircleCI](https://circleci.com/gh/clarkzjw/nginx-proxy-google.svg?style=svg)](https://circleci.com/gh/clarkzjw/nginx-proxy-google) [![](https://images.microbadger.com/badges/image/clarkzjw/nginx-proxy-google.svg)](https://microbadger.com/images/clarkzjw/nginx-proxy-google "Get your own image badge on microbadger.com")
 
 Inspired by [ngx_http_google_filter_module](https://github.com/cuber/ngx_http_google_filter_module)
 
