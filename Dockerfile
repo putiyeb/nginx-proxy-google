@@ -74,6 +74,7 @@ RUN \
   chmod +x /etc/init.d/nginx && \
   /usr/sbin/update-rc.d -f nginx defaults && \
   useradd --no-create-home nginx && \
+  sed -i -e 's/\r//g' /etc/init.d/nginx && \
   mkdir -p /var/cache/nginx
 
 EXPOSE 80
