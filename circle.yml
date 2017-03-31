@@ -10,4 +10,3 @@ dependencies:
 test:
   override:
     - docker run -d -p 8080:80 nginx-proxy-google; sleep 10
-

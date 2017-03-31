@@ -9,25 +9,27 @@ RUN \
   apt-get install -y -qq git wget build-essential zlib1g-dev libpcre3-dev git gcc g++ make && \
   rm -rf /var/lib/apt/lists/*
 
+ENV NGINX_VERSION=1.11.9 PCRE_VERSION=8.40 OPENSSL_VERSION=1.1.0e ZLIB_VERSION=1.2.11
+
 # Get Source Code
 RUN \
-  wget "http://nginx.org/download/nginx-1.11.9.tar.gz" && \
-  wget "http://linux.stanford.edu/pub/exim/pcre/pcre-8.40.tar.gz" && \
-  wget "https://www.openssl.org/source/openssl-1.1.0e.tar.gz" && \
-  wget "http://zlib.net/zlib-1.2.11.tar.gz" && \
+  wget "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" && \
+  wget "http://linux.stanford.edu/pub/exim/pcre/pcre-${PCRE_VERSION}.tar.gz" && \
+  wget "https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz" && \
+  wget "http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz" && \
   git clone https://github.com/cuber/ngx_http_google_filter_module && \
   git clone https://github.com/yaoweibin/ngx_http_substitutions_filter_module && \
-  tar xzf nginx-1.11.9.tar.gz && \
-  tar xzf pcre-8.40.tar.gz && \
-  tar xzf openssl-1.1.0e.tar.gz && \
-  tar xzf zlib-1.2.11.tar.gz
+  tar xzf nginx-${NGINX_VERSION}.tar.gz && \
+  tar xzf pcre-${PCRE_VERSION}.tar.gz && \
+  tar xzf openssl-${OPENSSL_VERSION}.tar.gz && \
+  tar xzf zlib-${ZLIB_VERSION}.tar.gz
 
 ADD ./nginx.service /etc/init.d/nginx
 ADD ./nginx.conf /etc/nginx/nginx.conf
 
 # Install Nginx
 RUN \
-  cd nginx-1.11.9 && \
+  cd nginx-${NGINX_VERSION} && \
   ./configure --prefix=/etc/nginx  \
               --sbin-path=/usr/sbin/nginx  \
               --conf-path=/etc/nginx/nginx.conf  \
@@ -64,9 +66,9 @@ RUN \
               --with-file-aio  \
               --with-http_v2_module  \
               --with-ipv6  \
-              --with-pcre=../pcre-8.40 \
-              --with-openssl=../openssl-1.1.0e  \
-              --with-zlib=../zlib-1.2.11  \
+              --with-pcre=../pcre-${PCRE_VERSION} \
+              --with-openssl=../openssl-${OPENSSL_VERSION}  \
+              --with-zlib=../zlib-${ZLIB_VERSION}  \
               --add-module=../ngx_http_google_filter_module  \
               --add-module=../ngx_http_substitutions_filter_module && \
   make -j4 && \
@@ -78,7 +80,6 @@ RUN \
   mkdir -p /var/cache/nginx
 
 EXPOSE 80
-EXPOSE 443
 
 # Run Nginx
-CMD service nginx start && tail -F /var/log/nginx/access.log
+CMD ["nginx", "-g", "daemon off;"]
