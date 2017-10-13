@@ -79,7 +79,5 @@ RUN \
   sed -i -e 's/\r//g' /etc/init.d/nginx && \
   mkdir -p /var/cache/nginx
 
-EXPOSE 8080
-
 # Run Nginx
 CMD ["nginx", "-g", "daemon off;"]
